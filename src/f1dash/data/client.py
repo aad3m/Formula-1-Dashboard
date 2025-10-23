@@ -11,8 +11,8 @@ def clear_and_rerun():
     st.rerun()
 
 @st.cache_data(ttl=CACHE_TTL)
-def get_completed_round() -> int:
-    data = provider.last_results_json()
+def get_completed_round(season: str) -> int:
+    data = provider.last_results_json(season)
     try:
         return int(data["MRData"]["RaceTable"]["Races"][0]["round"])
     except Exception:
@@ -20,8 +20,8 @@ def get_completed_round() -> int:
         return 0
 
 @st.cache_data(ttl=CACHE_TTL)
-def get_schedule() -> pd.DataFrame:
-    data = provider.schedule_json()
+def get_schedule(season: str) -> pd.DataFrame:
+    data = provider.schedule_json(season)
     races = data.get("MRData", {}).get("RaceTable", {}).get("Races", [])
     rows = [{
         "round": int(r.get("round", 0)),
@@ -45,8 +45,8 @@ def get_schedule() -> pd.DataFrame:
     return df
 
 @st.cache_data(ttl=CACHE_TTL)
-def get_driver_standings() -> pd.DataFrame:
-    data = provider.driver_standings_json()
+def get_driver_standings(season: str) -> pd.DataFrame:
+    data = provider.driver_standings_json(season)
     lists = data.get("MRData", {}).get("StandingsTable", {}).get("StandingsLists", [])
     if not lists:
         st.session_state["offline"] = True
@@ -68,8 +68,8 @@ def get_driver_standings() -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values("position", na_position="last")
 
 @st.cache_data(ttl=CACHE_TTL)
-def get_constructor_standings() -> pd.DataFrame:
-    data = provider.constructor_standings_json()
+def get_constructor_standings(season: str) -> pd.DataFrame:
+    data = provider.constructor_standings_json(season)
     lists = data.get("MRData", {}).get("StandingsTable", {}).get("StandingsLists", [])
     if not lists:
         st.session_state["offline"] = True
@@ -88,12 +88,12 @@ def get_constructor_standings() -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values("position", na_position="last")
 
 @st.cache_data(ttl=CACHE_TTL)
-def get_all_results_up_to(round_inclusive: int) -> pd.DataFrame:
+def get_all_results_up_to(season: str, round_inclusive: int) -> pd.DataFrame:
     if round_inclusive <= 0:
         return pd.DataFrame(columns=["round","race","driver","driver_code","team","finish","grid","status","points"])
     results = []
     for rnd in range(1, round_inclusive + 1):
-        data = provider.round_results_json(rnd)
+        data = provider.round_results_json(season, rnd)
         races = data.get("MRData", {}).get("RaceTable", {}).get("Races", [])
         if not races:
             continue
@@ -104,9 +104,9 @@ def get_all_results_up_to(round_inclusive: int) -> pd.DataFrame:
             drv = res.get("Driver", {}) or {}
             cons = res.get("Constructor", {}) or {}
             grid = None
-            grid_raw = res.get("grid", None)
-            if grid_raw not in (None, ""):
-                try: grid = int(grid_raw)
+            gr = res.get("grid", None)
+            if gr not in (None, ""):
+                try: grid = int(gr)
                 except Exception: grid = None
             results.append({
                 "round": round_num,

@@ -5,7 +5,6 @@ APP_CAPTION = "Data: Jolpica (Ergast-compatible) • Charts: Plotly • App: Str
 ERGAST_BASE = "https://api.jolpi.ca/ergast/f1"
 
 # "current" or a specific year like "2025"
-SEASON = "current"
 
 # Streamlit cache TTL (seconds)
 CACHE_TTL = 300
