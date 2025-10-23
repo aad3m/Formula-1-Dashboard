@@ -1,4 +1,4 @@
-
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://<your-app-subdomain>.streamlit.app)
 # 🏁 Modern Formula 1 Dashboard
 
 A **live Formula 1 analytics dashboard** built with **Streamlit + Plotly**, powered by the **Jolpica F1 API** — a fully *Ergast-compatible* replacement since Ergast shut down in 2024.

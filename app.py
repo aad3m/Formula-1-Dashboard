@@ -21,6 +21,11 @@ show_per_race = st.sidebar.checkbox("Show per-race table", value=False)
 if st.sidebar.button("🔄 Retry (clear cache)"):
     clear_and_rerun()
 
+with st.expander("ℹ️ App status"):
+    mode = "Offline" if st.session_state.get("offline") else "Online"
+    st.write(f"Status: **{mode}**")
+    st.write("Data source: **Jolpica (Ergast-compatible)**")
+
 # Data
 completed_round = get_completed_round()
 schedule_df = get_schedule()
