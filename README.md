@@ -34,6 +34,7 @@ A **live Formula 1 analytics dashboard** built with **Streamlit + Plotly**, powe
 ├─ test_http.py
 ├─ test_client.py
 ├─ test_fantasy.py
+├─ test_schedule.py
 └─ conftest.py
 ```
 
@@ -60,17 +61,6 @@ streamlit run app.py
 ```
 Then open http://localhost:8501 in your browser.
 
-## 🧪 Testing
-Run all unit tests (using pytest):
-```bash
-pytest -v
-```
-The workflow .github/workflows/ci.yml automatically runs tests on every push or PR for Python 3.10 → 3.13.
-
-You can also check coverage:
-```bash
-pytest --cov=src/f1dash --cov-report=term-missing
-```
 
 ## ⚙️ Data Source
 This dashboard uses Jolpica F1 API, a drop-in replacement for the discontinued Ergast API.
