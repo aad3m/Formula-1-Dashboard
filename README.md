@@ -1,7 +1,7 @@
 ## 🚀 Latest Release
 **v1.0.0 — Jolpica Edition**  
 [![GitHub release](https://img.shields.io/github/v/release/aad3m/Formula-1-Dashboard?include_prereleases&style=for-the-badge)](https://github.com/yourname/Formula-1-Dashboard/releases)
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://formula-1.streamlit.app)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://formula-1-dashboard.streamlit.app)
 # 🏁 Modern Formula 1 Dashboard
 
 A **live Formula 1 analytics dashboard** built with **Streamlit + Plotly**, powered by the **Jolpica F1 API** — a fully *Ergast-compatible* replacement since Ergast shut down in 2024.
